@@ -3,6 +3,8 @@ extends Node
 var score = 0
 var time = 0
 
+var multiplier = 1000
+
 var level = 1
 
 var level1_default = 60
@@ -11,8 +13,11 @@ var level2_default = 2000
 var level1_score = 0
 var level2_time = 0
 
+var Bonus = null
+
 signal score_changed
 signal time_changed
+signal bonus_changed
 
 var scores = {
 	0:0,
@@ -58,3 +63,7 @@ func change_time():
 	else:
 		time += 1
 	emit_signal("time_changed")
+
+func change_bonus(b):
+	Bonus = b
+	emit_signal("bonus_changed")

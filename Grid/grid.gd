@@ -35,6 +35,10 @@ func _ready():
 	all_pieces = make_array()
 	setup_board()
 	generate_pieces()
+	change_bonus()
+
+func change_bonus():
+	Global.change_bonus(possible_pieces[randi() % possible_pieces.size()])
 
 func make_array():
 	var matrix = [ ]
@@ -160,7 +164,12 @@ func find_matches():
 				count_matched += check_across(i, j, all_pieces[i][j].color);
 				mark_across(i,j, all_pieces[i][j].color)
 				mark_down(i,j, all_pieces[i][j].color)
-				Global.change_score(Global.scores[count_matched])
+				var multiplier = 1
+				if Global.Bonus != null:
+					var bonus = Global.Bonus.instance()
+					if bonus.color == all_pieces[i][j].color:
+						multiplier = Global.multiplier
+				Global.change_score(Global.scores[count_matched]*multiplier)
 	destroy_matched()
 
 func check_across(i,j,value):
@@ -254,3 +263,7 @@ func move_piece(p, position_change):
 	p.position += position_change
 
 
+
+
+func _on_Bonus_timeout():
+	change_bonus()

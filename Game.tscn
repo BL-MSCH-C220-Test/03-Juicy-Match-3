@@ -32,6 +32,10 @@ yStart = 832
 offset = 70
 background = ExtResource( 2 )
 
+[node name="Bonus" type="Timer" parent="grid"]
+wait_time = 5.0
+autostart = true
+
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
@@ -77,6 +81,8 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="HUD"]
 autostart = true
 
+[node name="Bonus" type="Node2D" parent="HUD"]
+
 [node name="Instructions" type="Control" parent="HUD"]
 pause_mode = 2
 visible = false
@@ -115,5 +121,6 @@ valign = 1
 
 [node name="Countdown" type="Timer" parent="HUD/Instructions"]
 autostart = true
+[connection signal="timeout" from="grid/Bonus" to="grid" method="_on_Bonus_timeout"]
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
 [connection signal="timeout" from="HUD/Instructions/Countdown" to="HUD/Instructions" method="_on_Countdown_timeout"]
