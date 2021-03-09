@@ -43,6 +43,8 @@ stream = ExtResource( 3 )
 [node name="Cow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
+[node name="Dying" type="Node2D" parent="."]
+
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0

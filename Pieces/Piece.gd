@@ -11,13 +11,18 @@ var highlight = Color(1,0.8,0,1)
 var fall_speed = 1.0
 
 var dying = false
+var dying_progress = 0
 
 func _ready():
 	randomize()
+	$Sprite.material = $Sprite.material.duplicate()
 
 func _physics_process(_delta):
-	if dying and not $Tween.is_active():
+	if dying and not $Tween.is_active() and dying_progress >= 1:
 		queue_free()
+	if dying:
+		dying_progress += 0.01
+		$Sprite.material.set_shader_param("progress",dying_progress)
 	if selected:
 		$Selected.emitting = true
 		$Select.show()
