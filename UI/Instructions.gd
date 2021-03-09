@@ -1,6 +1,6 @@
 extends Control
 
-var countdown = 5
+var countdown = 1
 
 func _ready():
 	update_label()

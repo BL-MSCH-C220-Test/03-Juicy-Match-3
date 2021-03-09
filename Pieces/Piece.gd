@@ -11,6 +11,10 @@ var highlight = Color(1,0.8,0,1)
 var fall_speed = 1.0
 
 var dying = false
+var was_selected = false
+
+onready var Explosion = load("res://Congrats/Explosion.tscn")
+onready var Congrats = load("res://Congrats/Great.tscn")
 
 func _ready():
 	randomize()
@@ -22,6 +26,7 @@ func _physics_process(_delta):
 		$Selected.emitting = true
 		$Select.show()
 		z_index = 10
+		was_selected = true
 	else:
 		$Selected.emitting = false
 		$Select.hide()
@@ -33,6 +38,12 @@ func move_piece(change):
 	position = target_position
 
 func die():
+	if was_selected:
+		var congrats = Congrats.instance()
+		congrats.position = position
+		get_node("/root/Game/Congrats").add_child(congrats)
+	was_selected = false
+	
 	dying = true
 	var target_color = $Sprite.modulate
 	target_color.s = 1
