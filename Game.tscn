@@ -115,5 +115,7 @@ valign = 1
 
 [node name="Countdown" type="Timer" parent="HUD/Instructions"]
 autostart = true
+
+[node name="Effects" type="Node2D" parent="."]
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
 [connection signal="timeout" from="HUD/Instructions/Countdown" to="HUD/Instructions" method="_on_Countdown_timeout"]
